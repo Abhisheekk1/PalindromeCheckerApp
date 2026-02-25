@@ -1,29 +1,21 @@
-import java.util.Deque;
-import java.util.LinkedList;
-
 public class PalindromeCheckerApp{
 
+    // Recursive helper function
+    private static boolean isPalindromeHelper(String text, int start, int end) {
+        // Base condition: crossed or met pointers
+        if (start >= end) return true;
+
+        // Compare characters
+        if (text.charAt(start) != text.charAt(end)) return false;
+
+        // Recurse inward
+        return isPalindromeHelper(text, start + 1, end - 1);
+    }
+
+    // Public method: prepares string and calls helper
     public static boolean isPalindrome(String text) {
-        Deque<Character> deque = new LinkedList<>();
-
-        // Step 1: Insert the characters into deque (ignore case and non-alphanumeric)
-        for (char ch : text.toLowerCase().toCharArray()) {
-            if (Character.isLetterOrDigit(ch)) { // optional: ignore spaces/punctuation
-                deque.addLast(ch);
-            }
-        }
-
-        // Step 2 & 3: Compare front and rear elements
-        while (deque.size() > 1) {
-            char first = deque.removeFirst();
-            char last = deque.removeLast();
-
-            if (first != last) {
-                return false; // mismatch found
-            }
-        }
-
-        return true; // palindrome
+        text = text.toLowerCase().replaceAll("[^a-z0-9]", ""); // optional: ignore non-alphanumeric
+        return isPalindromeHelper(text, 0, text.length() - 1);
     }
 
     public static void main(String[] args) {
