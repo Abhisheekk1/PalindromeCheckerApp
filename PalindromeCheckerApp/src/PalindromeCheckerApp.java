@@ -6,7 +6,7 @@ public class PalindromeCheckerApp{
     public static boolean isPalindrome(String text) {
         Deque<Character> deque = new LinkedList<>();
 
-        // Step 1: Insert characters into deque (ignore case and non-alphanumeric)
+        // Step 1: Insert the characters into deque (ignore case and non-alphanumeric)
         for (char ch : text.toLowerCase().toCharArray()) {
             if (Character.isLetterOrDigit(ch)) { // optional: ignore spaces/punctuation
                 deque.addLast(ch);
