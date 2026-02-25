@@ -7,25 +7,24 @@ public class PalindromeCheckerApp {
         // Hardcoded string
         String text = "madam";
 
-        // Create stack
-        Stack<Character> stack = new Stack<>();
+        // Convert string to char[]
+        char[] chars = text.toCharArray();
 
-        // Push characters into stack
-        for (int i = 0; i < text.length(); i++) {
-            stack.push(text.charAt(i));
-        }
-
+        int start = 0;
+        int end = chars.length - 1;
         boolean isPalindrome = true;
 
-        // Pop and compare
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) != stack.pop()) {
+        // Use two-pointer approach
+        while (start < end) {
+            if (chars[start] != chars[end]) {
                 isPalindrome = false;
                 break;
             }
+            start++;
+            end--;
         }
 
-        // Print result
+        // Display result
         if (isPalindrome) {
             System.out.println("The string is a palindrome.");
         } else {
