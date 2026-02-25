@@ -1,36 +1,36 @@
-
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
 
-import java.util.Stack;
+public class PalindromeCheckerApp{
 
-public class PalindromeCheckerApp {
+    public static boolean isPalindrome(String text) {
+        Deque<Character> deque = new LinkedList<>();
+
+        // Step 1: Insert characters into deque (ignore case and non-alphanumeric)
+        for (char ch : text.toLowerCase().toCharArray()) {
+            if (Character.isLetterOrDigit(ch)) { // optional: ignore spaces/punctuation
+                deque.addLast(ch);
+            }
+        }
+
+        // Step 2 & 3: Compare front and rear elements
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                return false; // mismatch found
+            }
+        }
+
+        return true; // palindrome
+    }
 
     public static void main(String[] args) {
+        String[] tests = {"madam", "racecar", "hello", "A man, a plan, a canal, Panama"};
 
-        // Hardcoded string
-        String text = "HELLO";
-
-        // Create Queue (FIFO)
-        Queue<Character> queue = new LinkedList<>();
-
-        // Create Stack (LIFO)
-        Stack<Character> stack = new Stack<>();
-
-        // Enqueue characters & Push characters
-        for (int i = 0; i < text.length(); i++) {
-            queue.add(text.charAt(i));   // FIFO
-            stack.push(text.charAt(i));  // LIFO
-        }
-
-        System.out.println("Queue (FIFO) order:");
-        while (!queue.isEmpty()) {
-            System.out.print(queue.remove() + " ");
-        }
-
-        System.out.println("\nStack (LIFO) order:");
-        while (!stack.isEmpty()) {
-            System.out.print(stack.pop() + " ");
+        for (String s : tests) {
+            System.out.println("\"" + s + "\" -> " + isPalindrome(s));
         }
     }
 }
