@@ -1,3 +1,7 @@
+
+import java.util.Queue;
+import java.util.LinkedList;
+
 import java.util.Stack;
 
 public class PalindromeCheckerApp {
@@ -5,30 +9,28 @@ public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
         // Hardcoded string
-        String text = "madam";
+        String text = "HELLO";
 
-        // Convert string to char[]
-        char[] chars = text.toCharArray();
+        // Create Queue (FIFO)
+        Queue<Character> queue = new LinkedList<>();
 
-        int start = 0;
-        int end = chars.length - 1;
-        boolean isPalindrome = true;
+        // Create Stack (LIFO)
+        Stack<Character> stack = new Stack<>();
 
-        // Use two-pointer approach
-        while (start < end) {
-            if (chars[start] != chars[end]) {
-                isPalindrome = false;
-                break;
-            }
-            start++;
-            end--;
+        // Enqueue characters & Push characters
+        for (int i = 0; i < text.length(); i++) {
+            queue.add(text.charAt(i));   // FIFO
+            stack.push(text.charAt(i));  // LIFO
         }
 
-        // Display result
-        if (isPalindrome) {
-            System.out.println("The string is a palindrome.");
-        } else {
-            System.out.println("The string is not a palindrome.");
+        System.out.println("Queue (FIFO) order:");
+        while (!queue.isEmpty()) {
+            System.out.print(queue.remove() + " ");
+        }
+
+        System.out.println("\nStack (LIFO) order:");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
         }
     }
 }
